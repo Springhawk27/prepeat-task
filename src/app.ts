@@ -4,6 +4,7 @@ import express, { Application, NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
 // eslint-disable-next-line no-unused-vars
 import cookieParser from 'cookie-parser';
+import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import routes from './app/routes';
 
 const app: Application = express();
@@ -22,6 +23,9 @@ app.use('/api/v1', routes);
 app.get('/', async (req: Request, res: Response) => {
   res.send('Working Successfully!');
 });
+
+// global error handler
+app.use(globalErrorHandler);
 
 // handle not found
 app.use((req: Request, res: Response, next: NextFunction) => {

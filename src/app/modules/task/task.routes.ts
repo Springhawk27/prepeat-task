@@ -12,8 +12,11 @@ router.post(
 );
 router.get('/:id', TaskController.getSingleTask);
 
-router.patch('/:id');
-router.delete('/:id');
+router.patch(
+  '/:id',
+  validateRequest(TaskValidation.updateTaskZodSchema),
+  TaskController.updateTask,
+);
 router.get('/', TaskController.getAllTasks);
 
 export const TaskRoutes = router;

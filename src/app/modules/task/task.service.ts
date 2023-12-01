@@ -21,12 +21,6 @@ const createTask = async (task: ITask): Promise<ITask | null> => {
   return createdTask;
 };
 
-// get single task
-const getSingleTask = async (id: string): Promise<ITask | null> => {
-  const result = await Task.findById(id);
-  return result;
-};
-
 const getAllTask = async (
   filters: ITaskFilters,
   paginationOptions: IPaginationOptions,
@@ -89,8 +83,26 @@ const getAllTask = async (
   };
 };
 
+// get single task
+const getSingleTask = async (id: string): Promise<ITask | null> => {
+  const result = await Task.findById(id);
+  return result;
+};
+
+// update task service
+const updateTask = async (
+  id: string,
+  payload: Partial<ITask>,
+): Promise<ITask | null> => {
+  const result = await Task.findOneAndUpdate({ _id: id }, payload, {
+    new: true,
+  });
+  return result;
+};
+
 export const TaskService = {
   createTask,
-  getSingleTask,
   getAllTask,
+  getSingleTask,
+  updateTask,
 };
