@@ -1,8 +1,9 @@
 import express from 'express';
+import { TaskController } from './task.controller';
 
 const router = express.Router();
 
-router.post('/create-task');
+router.post('/create-task', TaskController.createTask);
 router.get('/:id');
 
 router.patch('/:id');
