@@ -27,6 +27,18 @@ const createTask = async (req: Request, res: Response) => {
   }
 };
 
+const getSingleTask = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const result = await TaskService.getSingleTask(id);
+
+  sendResponse<ITask>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Task Retrieved Successfully',
+    data: result,
+  });
+});
+
 const getAllTasks = catchAsync(async (req: Request, res: Response) => {
   const filters = pick(req.query, taskFilterableFields);
 
@@ -45,5 +57,6 @@ const getAllTasks = catchAsync(async (req: Request, res: Response) => {
 
 export const TaskController = {
   createTask,
+  getSingleTask,
   getAllTasks,
 };

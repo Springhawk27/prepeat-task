@@ -10,10 +10,10 @@ router.post(
   validateRequest(TaskValidation.createTaskZodSchema),
   TaskController.createTask,
 );
-router.get('/:id');
+router.get('/:id', TaskController.getSingleTask);
 
 router.patch('/:id');
 router.delete('/:id');
-router.get('/');
+router.get('/', TaskController.getAllTasks);
 
 export const TaskRoutes = router;

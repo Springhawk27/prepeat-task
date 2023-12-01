@@ -21,6 +21,12 @@ const createTask = async (task: ITask): Promise<ITask | null> => {
   return createdTask;
 };
 
+// get single task
+const getSingleTask = async (id: string): Promise<ITask | null> => {
+  const result = await Task.findById(id);
+  return result;
+};
+
 const getAllTask = async (
   filters: ITaskFilters,
   paginationOptions: IPaginationOptions,
@@ -85,5 +91,6 @@ const getAllTask = async (
 
 export const TaskService = {
   createTask,
+  getSingleTask,
   getAllTask,
 };
